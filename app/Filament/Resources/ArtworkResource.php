@@ -70,7 +70,7 @@ class ArtworkResource extends Resource
                     ->label('Order')
                     ->options(Order::all()->pluck('orderno', 'id'))
                     ->required()
-                    ->hint("[Go to Order](" . url("/orders/") . ")"),
+                    ->hint("[Go to Order](" . url("/orders/") .  ")"),
                 Select::make('type')
                     ->options([
                         'sheetform' => 'Sheetform',

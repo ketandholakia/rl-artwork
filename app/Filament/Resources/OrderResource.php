@@ -36,8 +36,8 @@ class OrderResource extends Resource
 
 
     public static function form(Form $form): Form
-    {   
-      
+    {
+
         return $form
             ->schema([
                 TextInput::make('orderno')->required(),
@@ -45,7 +45,7 @@ class OrderResource extends Resource
                 Select::make('orders_customer_id')
                     ->label('Customer')
                     ->options(Customer::all()->pluck('name', 'id'))
-                    
+
                     ->required(),
 
                 Select::make('status')
@@ -62,7 +62,7 @@ class OrderResource extends Resource
 
                     ])->required()->default('neworder'),
 
-                    Select::make('priority')
+                Select::make('priority')
                     ->options([
                         'high' => 'High',
                         'medium' => 'Medium',
@@ -70,8 +70,8 @@ class OrderResource extends Resource
 
                     ])->default('medium'),
 
-                    TextInput::make('url'),
-                    TextInput::make('id'),
+                TextInput::make('url'),
+                TextInput::make('id'),
 
 
 
@@ -79,8 +79,6 @@ class OrderResource extends Resource
 
 
             ]);
-
-        
     }
 
     public static function table(Table $table): Table
@@ -107,29 +105,29 @@ class OrderResource extends Resource
                         'success' => 'preprocessdone',
                     ])->searchable()
                     ->sortable(),
+
+
+
                 TextColumn::make('updated_at')
                     ->sortable(),
 
+
                 TextColumn::make('customer.name')
                     ->label('Customer')
-                    ->tooltip('Filter by this Customer')
+                    ->tooltip('Filter by this customer')
                     ->disableClick()
-                    ->extraAttributes(function (Order $record) {
+                    ->extraAttributes(function ($record) {
                         return [
-                            'wire:click' => '$set("tableFilters.orders_customer_id.values", ['. $record->orders_customer_id .'])',
-                            
-
+                            'wire:click' => '$set("tableFilters.orders_customer_id.values", [' . $record->orders_customer_id . '])',
                             'class' => 'transition hover:text-primary-500 cursor-pointer',
-
-                            // http://rl.loc/orders?tableSortColumn=updated_at&tableSortDirection=desc&tableFilters[orders_customer_id][value]=8
-                            // http://rl.loc/orders?tableSortColumn=updated_at&tableSortDirection=desc&tableFilters[orders_customer_id][value]=8
-                            // http://rl.loc/orders?tableSortColumn=updated_at&tableSortDirection=desc&tableFilters[orders_customer_id][vaule][0]=8
-                            // http://rl.loc/orders?tableSortColumn=updated_at&tableSortDirection=desc&tableFilters[orders_customer_id][vaule]=8
-                            // http://rl.loc/orders?tableSortColumn=updated_at&tableSortDirection=desc&tableFilters[orders_customer_id][values][0]=8
-                            // http://rl.loc/orders?tableSortColumn=updated_at&tableSortDirection=desc&tableFilters[orders_customer_id][vaule][0]=8
-                            // http://rl.loc/orders?tableSortColumn=updated_at&tableSortDirection=desc&tableFilters[orders_customer_id][0]=8
                         ];
                     }),
+
+
+
+
+
+
 
 
                 // 'neworder','inprocess','noartwork','approved','cancelled','printed','delivered'
