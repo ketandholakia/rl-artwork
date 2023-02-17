@@ -22,6 +22,9 @@ use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Resources\OrderResource\Widgets\StatsOverview;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+
+
 
 
 
@@ -73,7 +76,15 @@ class OrderResource extends Resource
                 TextInput::make('url'),
                 TextInput::make('id'),
 
-
+                Forms\Components\Section::make('Images')
+                    ->schema([
+                        SpatieMediaLibraryFileUpload::make('media')
+                            ->collection('product-images')
+                            ->multiple()
+                            ->maxFiles(5)
+                            ->disableLabel(),
+                    ])
+                    ->collapsible(),
 
 
 
@@ -86,11 +97,17 @@ class OrderResource extends Resource
         return $table
             ->columns([
 
+
+
                 TextColumn::make('orderno')
                     ->searchable()
                     ->sortable()
                     ->label('Order No'),
                 TextColumn::make('customer.name'),
+
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('product-image')
+                    ->label('Image')
+                    ->collection('product-images'),
 
                 BadgeColumn::make('status')
                     ->colors([

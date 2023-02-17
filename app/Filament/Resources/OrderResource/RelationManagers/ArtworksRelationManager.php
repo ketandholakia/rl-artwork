@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Models\Artwork;
+use Filament\Tables\Columns\TextColumn;
+
 
 
 class ArtworksRelationManager extends RelationManager
@@ -67,8 +69,8 @@ class ArtworksRelationManager extends RelationManager
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('priority')->label('Priority'),
-                Tables\Columns\TextColumn::make('requiredqty')->label('R. Qty')                    
-                ->sortable(),
+                Tables\Columns\TextColumn::make('requiredqty')->label('R. Qty')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('printedqty')->label('Prt Qty'),
                 Tables\Columns\TextColumn::make('Balance')->label('Bal Qty')
                     ->getStateUsing(function (Artwork $record) {
@@ -76,7 +78,7 @@ class ArtworksRelationManager extends RelationManager
                         return $record->printedqty - $record->requiredqty;
                     }),
                 Tables\Columns\TextColumn::make('remark')->label('Ref')->searchable(),
-                
+
 
                 Tables\Columns\BadgeColumn::make('awstatus')->label('Status')
                     ->colors([
@@ -87,6 +89,9 @@ class ArtworksRelationManager extends RelationManager
                         'success' => 'Plate Sent',
                         'warning' => 'noartworkfile',
                     ])->sortable(),
+
+                TextColumn::make('updated_at')->sortable(),
+
 
 
 

@@ -9,12 +9,15 @@
         "alperenersoy/filament-export": "^0.2.6",
         "awcodes/filament-quick-create": "^1.2",
         "backpack/backupmanager": "^4.0",
+        "barryvdh/laravel-dompdf": "^2.0",
         "filament/filament": "^2.0",
+        "filament/spatie-laravel-media-library-plugin": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "konnco/filament-import": "^1.4",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "saadj55/filament-copyable": "^0.1.4",
         "shuvroroy/filament-spatie-laravel-backup": "^1.2",
         "webbingbrasil/filament-advancedfilter": "^1.1"
     },
@@ -70,4 +73,7 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true
+
+
+    
 }

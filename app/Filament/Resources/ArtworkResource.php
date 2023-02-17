@@ -32,6 +32,8 @@ use Filament\Forms\Components\Grid;
 use Konnco\FilamentImport\Actions\ImportAction;
 use Konnco\FilamentImport\ImportField;
 use App\Filament\Resources\ArtworkResource\Widgets\StatsOverview;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+
 
 
 
@@ -131,6 +133,18 @@ class ArtworkResource extends Resource
                 // $table->integer('printedqty');
                 // $table->bigInteger('artworks_media_id');
                 // $table->timestamps();
+                Forms\Components\Section::make('Images')
+                    ->schema([
+                        SpatieMediaLibraryFileUpload::make('media')
+                            ->collection('product-images')
+                            ->multiple()
+                            ->maxFiles(5)
+                            ->disableLabel(),
+                    ])
+                    ->collapsible(),
+
+
+
             ]);
     }
 
@@ -143,6 +157,11 @@ class ArtworkResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Description'),
+
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('product-image')
+                    ->label('Image')
+                    ->collection('product-images'),
+
                 TextColumn::make('requiredqty')->sortable()
                     ->searchable(),
                 // TextColumn::make('jobrun'),
